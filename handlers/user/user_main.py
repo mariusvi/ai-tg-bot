@@ -25,7 +25,7 @@ async def about_command(message: types.Message):
 async def scrape_command(message: types.Message):
     before = datetime.now()
     await message.answer("Starting scraping!")
-    data = await timer_func(message)
+    # await timer_func(message)
     data = await scraper.scrape('', ['crypto'])
     # do something with data: to SQL.....
     result = datetime.now() - before
