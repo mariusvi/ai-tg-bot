@@ -28,12 +28,12 @@ class BaseScraper(ABC):
         categories_links: List[Optional[GroupLink]] = await self._retrieve_categories_list()
         
         scraped_items_links: List[Optional[ItemLink]] = []
-        for categorie in categories_links[6:7]:
+        for categorie in categories_links[2:10]:
             items_links: List[Optional[ItemLink]] = await self._retrieve_items_list(categorie.url)
             scraped_items_links.append(items_links)
 
         scrapped_items_data: List[Item] = []
-        for item_link_group in tqdm(scraped_items_links):
+        for item_link_group in tqdm(scraped_items_links): #TODO one for less
             for item_link in item_link_group:
                 data = await self._retrieve_item_data(item_link.url)
                 scrapped_items_data.append(data)

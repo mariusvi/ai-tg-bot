@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "ai-tg-bot"
+version = "0.1.0"
+description = "TG bot for python scripts control"
+authors = ["mariusvi <marius@vilkaitis.lt>"]
+readme = "README.md"
+packages = [{include = "ai_tg_bot"}]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+aiogram = "^2.23.1"
+poetry-dotenv-plugin = "^0.1.0"
+pydantic = "^1.10.2"
+bs4 = "^0.0.1"
+tqdm = "^4.64.1"
+asyncio = "^3.4.3"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

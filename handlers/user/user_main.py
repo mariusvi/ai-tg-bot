@@ -29,7 +29,7 @@ async def scrape_command(message: types.Message):
     data = await scraper.scrape('', ['crypto'])
     # do something with data: to SQL.....
     result = datetime.now() - before
-    await message.answer(f"Job finnished! Total time: {result}")
+    await message.answer(f"Job finished! Total time: {result}")
 
 
 def register_user_handlers(dp: Dispatcher):
