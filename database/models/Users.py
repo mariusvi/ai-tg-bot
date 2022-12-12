@@ -1,15 +1,22 @@
+from sqlalchemy import Column, String, Integer
+from database import db
 
-class Users():
-    __table__ = "users"
+class Users(db.Base):
+    __tablename__ = "users"
 
-    id = None
-    name = None
-    tg_user_name = None
-    tg_id = None
-    chat_id = None
-    role = "user"
+    name = Column("name", String)
+    tg_user_name = Column("tg_user_name", String)
+    tg_id = Column("tg_id", Integer, primary_key=True)
+    chat_id = Column("chat_id", Integer)
+    role = Column("role", String)
 
-    def __init__():
-        pass
+    def __init__(self, name, tg_user_name, tg_id, chat_id, role):
+        self.name = name
+        self.tg_user_name = tg_user_name
+        self.tg_id = tg_id
+        self.chat_id = chat_id
+        self.role = role
 
-    
+    def __repr__(self) -> str:
+        return f"{self.name} {self.tg_user_name} {self.tg_id} {self.chat_id} {self.role}"
+

@@ -1,13 +1,16 @@
 from aiogram import executor
 from bot import dp
 from handlers import user_main
-from database.db import start_database
+from database import db
 
 
 async def on_startup(_):
     print("Bot started!")
-    start_database()
+    print("Starting database!")
+    db.start_database()
     print("Database started!")
+    
+    
     
 
 
