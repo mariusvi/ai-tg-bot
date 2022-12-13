@@ -1,7 +1,10 @@
 from aiogram import executor
 import asyncio
 from bot import dp
-from handlers import user_main
+from handlers import start
+from handlers import about
+from handlers import test_db
+from handlers import scrape
 from database.db import engine
 from database.orm_base import metadata
 from utils.scheduler import scheduler
@@ -20,7 +23,10 @@ async def on_startup(_):
     
 
 
-user_main.register_user_handlers(dp)
+scrape.register_admin_scrape_handlers(dp)
+start.register_user_start_handlers(dp)
+about.register_user_about_handlers(dp)
+test_db.register_user_test_db_handlers(dp)
 
 
 
