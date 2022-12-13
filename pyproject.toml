@@ -16,6 +16,7 @@ tqdm = "^4.64.1"
 asyncio = "^3.4.3"
 sqlalchemy = "^1.4.45"
 aioschedule = "^0.5.2"
+sqlalchemy-utils = "^0.38.3"
 
 
 [build-system]

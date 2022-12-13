@@ -1,14 +1,18 @@
 
 from sqlalchemy import create_engine
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy.orm import sessionmaker, scoped_session
+import threading
 
 
-Base = declarative_base()
+engine = create_engine("sqlite:///db.sqlite", echo=True)
 
-def start_database():
-    global session
-    engine = create_engine("sqlite:///db.sqlite", echo=True)
-    Session = sessionmaker(bind=engine)
-    session = Session()
-    Base.metadata.create_all(bind=engine)
+session_factory = sessionmaker(bind=engine)
+Session = scoped_session(session_factory)
+
+thread_local = threading.local()
+
+def get_session():
+    if not hasattr(thread_local, "session"):
+        thread_local.session = Session()
+    return thread_local.session
+

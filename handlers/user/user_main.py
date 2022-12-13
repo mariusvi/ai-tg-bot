@@ -2,11 +2,12 @@ from aiogram import types, Dispatcher
 from bot import dp, bot
 from scraper.scraper import Scraper
 import asyncio
-from database import db
+from database.db import get_session
 from database.models.Users import Users
 from datetime import datetime
 
 scraper = Scraper()
+session = get_session()
 
 async def timer_func(message):
     for i in range(1):
@@ -15,11 +16,12 @@ async def timer_func(message):
     return True
 
 async def start_command(message: types.Message):
-    user_in_db = db.session.query(Users).filter(Users.tg_id == message.from_user.id).first()
-    if not user_in_db:
-        user = Users(message.from_user.first_name, message.from_user.username, message.from_user.id, message.chat.id, "user")
-        db.session.add(user)
-        db.session.commit()
+    with session:
+        user_in_db = session.query(Users).filter(Users.tg_id == message.from_user.id).first()
+        if not user_in_db:
+            user = Users(message.from_user.first_name, message.from_user.username, message.from_user.id, message.chat.id, "user")
+            session.add(user)
+            session.commit()
     try:
         await bot.send_message(message.from_user.id, "Hello world!")
     except:
@@ -39,11 +41,12 @@ async def scrape_command(message: types.Message):
     await message.answer(f"Job finished! Total time: {result}")
 
 async def db_command(message: types.Message):
-    user = Users("first name", "tg user name", 1231, 9874, "user")
-    db.session.add(user)
-    db.session.commit()
+    with session:
+        user = Users("first name", "tg user name", 1231, 9874, "user")
+        session.add(user)
+        session.commit()
     await bot.send_message(message.from_user.id, "Data in database!")
-    await bot.send_message(message.from_user.id, user)
+
 
 
 
