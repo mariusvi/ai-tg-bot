@@ -26,6 +26,6 @@ user_main.register_user_handlers(dp)
 
 
 
-executor.start_polling(dp, skip_updates=False, on_startup=on_startup)
+executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
 
 

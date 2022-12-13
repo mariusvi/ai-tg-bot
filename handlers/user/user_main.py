@@ -1,21 +1,24 @@
 from aiogram import types, Dispatcher
 from bot import dp, bot
 from scraper.scraper import Scraper
-import asyncio
+# import asyncio
 from database.db import get_session
 from database.models.Users import Users
+from database.models.Data_sources import Data_sources
 from datetime import datetime
+
 
 scraper = Scraper()
 session = get_session()
 
-async def timer_func(message):
-    for i in range(1):
-       await message.answer(f"Starting scraping!{i}")
-       await asyncio.sleep(1) 
-    return True
+# async def timer_func(message):
+#     for i in range(1):
+#        await message.answer(f"Starting scraping!{i}")
+#        await asyncio.sleep(1) 
+#     return True
 
 async def start_command(message: types.Message):
+    # await timer_func(message)
     with session:
         user_in_db = session.query(Users).filter(Users.tg_id == message.from_user.id).first()
         if not user_in_db:
@@ -34,9 +37,14 @@ async def about_command(message: types.Message):
 async def scrape_command(message: types.Message):
     before = datetime.now()
     await message.answer("Start scraping!")
-    # await timer_func(message)
     data = await scraper.scrape('', ['crypto'])
-    # do something with data: to SQL.....
+    with session:
+        for scraper_data in data:
+            for item in scraper_data["items"]:
+                if not session.query(Data_sources).filter(Data_sources.name == item.title).first():
+                    payload = Data_sources(name = item.title, category=item.category, url=item.url, description=item.description, icon=item.icon)
+                    session.add(payload)
+                    session.commit()
     result = datetime.now() - before
     await message.answer(f"Job finished! Total time: {result}")
 

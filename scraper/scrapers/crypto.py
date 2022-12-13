@@ -36,7 +36,7 @@ class Crypto(BaseScraper):
         
     async def _retrieve_item_data(self, keyword: str) -> List[ItemLink]:
         results: List[ItemLink] = []
-        await asyncio.sleep(4)
+        await asyncio.sleep(2)
         content = await self._get_page_content(keyword)
         if content:
             head_segment = content.find("div", class_="review__head")

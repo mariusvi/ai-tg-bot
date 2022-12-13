@@ -17,7 +17,6 @@ class BaseScraper(ABC):
         pass
 
     async def _get_page_content(self, query: str) -> Optional[BeautifulSoup]:
-        print(f"{self.__domain__}/{query}")
         resp = requests.get(f"{self.__domain__}/{query}")
         if resp.status_code == 200:
             return BeautifulSoup(resp.content, features="html.parser")
@@ -28,16 +27,14 @@ class BaseScraper(ABC):
         categories_links: List[Optional[GroupLink]] = await self._retrieve_categories_list()
         
         scraped_items_links: List[Optional[ItemLink]] = []
-        for categorie in categories_links[2:10]:
+        for categorie in categories_links[5:8]:
             items_links: List[Optional[ItemLink]] = await self._retrieve_items_list(categorie.url)
             scraped_items_links.append(items_links)
 
         scrapped_items_data: List[Item] = []
-        for item_link_group in tqdm(scraped_items_links): #TODO one for less
-            for item_link in item_link_group:
+        for item_link_group in scraped_items_links: #TODO one for less
+            for item_link in tqdm(item_link_group):
                 data = await self._retrieve_item_data(item_link.url)
                 scrapped_items_data.append(data)
-        
-        print(scrapped_items_data[:5])
-
+                
         return scrapped_items_data
