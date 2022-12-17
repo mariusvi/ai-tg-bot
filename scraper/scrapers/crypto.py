@@ -1,16 +1,16 @@
 from typing import List
 from scraper.models.item import Item, ItemLink, GroupLink
 from scraper.scrapers.base import BaseScraper
-import asyncio
+
 
 
 class Crypto(BaseScraper):
     __items_per_page__: int = 44
     __domain__: str = "https://cryptolinks.com"
 
-    async def _retrieve_categories_list(self, keyword: str = "") -> List[GroupLink]:
+    def _retrieve_categories_list(self, keyword: str = "") -> List[GroupLink]:
         results: List[GroupLink] = []
-        content = await self._get_page_content(keyword)
+        content = self._get_page_content(keyword)
         if content:
             list_segment = content.find("div", class_="thumb__row")
             items_list = list_segment.find_all("a", class_="thumb__head")
@@ -21,10 +21,9 @@ class Crypto(BaseScraper):
 
         return results
 
-    async def _retrieve_items_list(self, keyword: str) -> List[ItemLink]:
+    def _retrieve_items_list(self, keyword: str) -> List[ItemLink]:
         results: List[ItemLink] = []
-        await asyncio.sleep(4)
-        content = await self._get_page_content(keyword)
+        content = self._get_page_content(keyword)
         if content:
             list_segment = content.find("div", class_="content__row")
             items_list = list_segment.find_all("div", class_="content__col")
@@ -34,10 +33,9 @@ class Crypto(BaseScraper):
 
         return results
         
-    async def _retrieve_item_data(self, keyword: str) -> List[ItemLink]:
+    def _retrieve_item_data(self, keyword: str) -> List[ItemLink]:
         results: List[ItemLink] = []
-        await asyncio.sleep(2)
-        content = await self._get_page_content(keyword)
+        content = self._get_page_content(keyword)
         if content:
             head_segment = content.find("div", class_="review__head")
             title = head_segment.find("h1", class_="review__head-name").text

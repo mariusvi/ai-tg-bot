@@ -3,15 +3,16 @@ from scraper.scraper import Scraper
 from database.db import get_session
 from database.models.Data_sources import Data_sources
 from datetime import datetime
+import asyncio
 
 scraper = Scraper()
 session = get_session()
 
 async def scrape_command(message: types.Message):
-    #TODO check is admin
+    #TODO: check is admin
     before = datetime.now()
     await message.answer("Start scraping!")
-    data = await scraper.scrape('', ['crypto'])
+    data = await asyncio.get_running_loop().run_in_executor(None, scraper.scrape, '', ['crypto'])  
     with session:
         for scraper_data in data:
             for item in scraper_data["items"]:

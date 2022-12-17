@@ -16,25 +16,25 @@ class BaseScraper(ABC):
     def _retrieve_items_list(self, pages_count: int, keyword: str) -> List[ItemLink]:
         pass
 
-    async def _get_page_content(self, query: str) -> Optional[BeautifulSoup]:
+    def _get_page_content(self, query: str) -> Optional[BeautifulSoup]:
         resp = requests.get(f"{self.__domain__}/{query}")
         if resp.status_code == 200:
             return BeautifulSoup(resp.content, features="html.parser")
         raise Exception("Cannot reach content!")
 
 
-    async def scrape(self, keyword: str) -> List[Item]:
-        categories_links: List[Optional[GroupLink]] = await self._retrieve_categories_list()
+    def scrape(self, keyword: str) -> List[Item]:
+        categories_links: List[Optional[GroupLink]] = self._retrieve_categories_list()
         
         scraped_items_links: List[Optional[ItemLink]] = []
         for categorie in categories_links[5:8]:
-            items_links: List[Optional[ItemLink]] = await self._retrieve_items_list(categorie.url)
+            items_links: List[Optional[ItemLink]] = self._retrieve_items_list(categorie.url)
             scraped_items_links.append(items_links)
 
         scrapped_items_data: List[Item] = []
         for item_link_group in scraped_items_links: #TODO one for less
             for item_link in tqdm(item_link_group):
-                data = await self._retrieve_item_data(item_link.url)
+                data = self._retrieve_item_data(item_link.url)
                 scrapped_items_data.append(data)
                 
         return scrapped_items_data

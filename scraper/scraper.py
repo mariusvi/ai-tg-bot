@@ -8,7 +8,7 @@ class Scraper:
     def _parse_scrapers(self, scrapers: list[str]) -> List[BaseScraper]:
         return [SCRAPERS[scraper]() for scraper in scrapers]
 
-    async def scrape(
+    def scrape(
         self, keyword: str, scrapers: List[str]
     ) -> List[Dict]:
         parsed_scrapers: List[BaseScraper] = self._parse_scrapers(scrapers)
@@ -19,7 +19,7 @@ class Scraper:
             results.append(
                 {
                     "scraper": scraper.__class__.__name__,
-                    "items": await scraper.scrape(keyword),
+                    "items": scraper.scrape(keyword),
                 }
             )
 
