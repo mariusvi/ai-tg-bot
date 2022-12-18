@@ -8,10 +8,14 @@ async def send_message_1():
     print("Send first message")
 
 async def send_message_2():
-    await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch, 16203174,16203177, 1)  
+    print("Send second message")
+
+async def update_db():
+    await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch)  
 
 
 async def scheduler():
+    aioschedule.every().day.at("00:00").do(update_db)
     aioschedule.every().day.at("17:45").do(send_message_1)
     aioschedule.every().day.at("14:33").do(send_message_2)
     while True:

@@ -23,7 +23,6 @@ datasets_button = InlineKeyboardButton(text="🔢 Database", callback_data="DATA
 predictions_button = InlineKeyboardButton(text="🎯 Predictions", callback_data="PREDICTIONS_BUTTON")
 START_KEYBOARD = InlineKeyboardMarkup().add(commands_button).add(datasets_button).add(predictions_button)
 
-
 COMMANDS_CAPTION = """🗒️ <b>Docs for available commands</b>
 
 USER
@@ -42,8 +41,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempor tristi
 """
 back_button = InlineKeyboardButton(text="⬅️ Back", callback_data="BACK_BUTTON")
 COMMANDS_KEYBOARD = InlineKeyboardMarkup().add(back_button)
-
-
 
 # async def timer_func(message):
 #     for i in range(1):
