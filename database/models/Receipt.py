@@ -21,6 +21,7 @@ class Receipt(Base):
     tx_hash = Column(String, primary_key=True)
     transactionIndex = Column(Integer)
     type = Column(String)
+    root = Column(String)
 
     __table_args__ = (
         Index('index_receipt', 'fromAddress', 'toAddress', 'tx_hash'),
