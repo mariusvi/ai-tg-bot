@@ -9,13 +9,6 @@ class Data_sources(Base):
     url = Column("url", String)
     description = Column("description", String)
     icon = Column("icon", String)
-
-    def __init__(self, name, category, url, description, icon):
-        self.name = name
-        self.category = category
-        self.url = url
-        self.description = description
-        self.icon = icon
-
+    
     def __repr__(self) -> str:
         return f"{self.name} {self.category} {self.url} {self.description} {self.icon}"

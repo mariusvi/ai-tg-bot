@@ -1,4 +1,3 @@
-
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, scoped_session
 import threading
@@ -11,7 +10,7 @@ Session = scoped_session(session_factory)
 
 thread_local = threading.local()
 
-def get_session():
+def get_session() -> scoped_session:
     if not hasattr(thread_local, "session"):
         thread_local.session = Session()
     return thread_local.session
