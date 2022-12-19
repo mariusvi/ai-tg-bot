@@ -7,14 +7,16 @@ from database.models.Tx import Tx
 from database.db import get_session
 from sqlalchemy import desc
 from tqdm import tqdm
+from config import web3_rpc, fetch_balances
 
 
 class Fetch_blocks():
     
     def __init__(self, every_block: int = 2) -> None:
-        self._web3 = Web3(Web3.HTTPProvider("https://mainnet.infura.io/v3/655d9d8e14044364add3a18ed79710b2"))
+        self._web3 = Web3(Web3.HTTPProvider(web3_rpc))
         self._session = get_session()
         self._every_block = every_block
+        self._fetch_balances = fetch_balances
 
 
     def start_fetch(self, block_range: List = []) -> float:
@@ -131,12 +133,12 @@ class Fetch_blocks():
         return tx_row
 
 
-    def get_receipt_row(self, block_num, tx_hash, balance=False) -> dict:
+    def get_receipt_row(self, block_num, tx_hash) -> dict:
 
         receipt_data = self._web3.eth.getTransactionReceipt(tx_hash)
         receipt_row = {}
 
-        if balance:
+        if self._fetch_balances:
             balance_from = self._web3.eth.getBalance(receipt_data['from'], block_identifier=block_num)
             try:
                 balance_to = self._web3.eth.getBalance(receipt_data['to'], block_identifier=block_num)
@@ -162,7 +164,7 @@ class Fetch_blocks():
             else:
                 receipt_row[key] = value
         
-        receipt_row['balanceFrom'] = balance_from
-        receipt_row['balanceTo'] = balance_to
+        receipt_row['balanceFrom'] = str(balance_from)
+        receipt_row['balanceTo'] = str(balance_to)
                  
         return receipt_row    
