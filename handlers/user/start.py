@@ -28,14 +28,14 @@ COMMANDS_CAPTION = """🗒️ <b>Docs for available commands</b>
 USER
 • /start: Command for start
 
-• /fetch: Command to fetch data
-
 • /database: Command to fetch data
 
 • /predict: Command to predict price.
 
 ADMIN
 • /scrape: Command for start scraper
+
+• /fetch: Command to fetch data, sync all blocks from latest on db till latest on chain. Use /fetch 101 159 for custom range.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempor tristique sagittis. 
 """

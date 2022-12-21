@@ -17,6 +17,7 @@ asyncio = "^3.4.3"
 sqlalchemy = "^1.4.45"
 aioschedule = "^0.5.2"
 sqlalchemy-utils = "^0.38.3"
+web_scraper = { git = "https://github.com/mariusvi/web_scraper.git", branch = "main" }
 
 
 [build-system]

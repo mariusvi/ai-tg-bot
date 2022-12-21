@@ -8,7 +8,7 @@ from handlers import scrape
 from handlers import fetch_blocks
 from database.db import engine
 from database.orm_base import metadata
-from utils.scheduler import scheduler
+from utils.scheduler.scheduler import scheduler
 
 
 async def on_startup(_):
