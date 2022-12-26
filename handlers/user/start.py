@@ -19,7 +19,7 @@ tempor tristique sagittis. Mauris imperdiet imperdiet enim vel efficitur.
 Fusce elementum sem quis mauris pulvinar, eu tincidunt leo viverra.
 </em>"""
 commands_button = InlineKeyboardButton(text="📖 Commands", callback_data="COMMANDS_BUTTON")
-datasets_button = InlineKeyboardButton(text="🔢 Database", callback_data="DATASETS_BUTTON")
+datasets_button = InlineKeyboardButton(text="🔢 Database", callback_data="DATABASE_BUTTON")
 predictions_button = InlineKeyboardButton(text="🎯 Predictions", callback_data="PREDICTIONS_BUTTON")
 START_KEYBOARD = InlineKeyboardMarkup().add(commands_button).add(datasets_button).add(predictions_button)
 
@@ -39,7 +39,7 @@ ADMIN
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempor tristique sagittis. 
 """
-back_button = InlineKeyboardButton(text="⬅️ Back", callback_data="BACK_BUTTON")
+back_button = InlineKeyboardButton(text="⬅️ Back", callback_data="BACK_TO_START_BUTTON")
 COMMANDS_KEYBOARD = InlineKeyboardMarkup().add(back_button)
 
 # async def timer_func(message):
@@ -70,9 +70,6 @@ async def back_button_callback(callback: types.CallbackQuery):
         await callback.message.edit_caption(START_CAPTION, parse_mode="HTML")
         await callback.message.edit_reply_markup(START_KEYBOARD)
 
-async def datasets_button_callback(callback: types.CallbackQuery):
-        await callback.answer("Database clicked! 🖱️")
-
 async def predictions_button_callback(callback: types.CallbackQuery):
         await callback.answer("Predictions clicked! 🖱️")
 
@@ -80,8 +77,8 @@ async def predictions_button_callback(callback: types.CallbackQuery):
 def register_user_start_handlers(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=["start"])  
     dp.register_callback_query_handler(comands_button_callback, lambda query: query.data in ["COMMANDS_BUTTON"])  
-    dp.register_callback_query_handler(back_button_callback, lambda query: query.data in ["BACK_BUTTON"])  
-    dp.register_callback_query_handler(datasets_button_callback, lambda query: query.data in ["DATASETS_BUTTON"])  
+    dp.register_callback_query_handler(back_button_callback, lambda query: query.data in ["BACK_TO_START_BUTTON"])  
     dp.register_callback_query_handler(predictions_button_callback, lambda query: query.data in ["PREDICTIONS_BUTTON"])  
+    dp.register_callback_query_handler(start_command, lambda query: query.data in ["HOME_BUTTON"])  
 
 

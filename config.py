@@ -4,7 +4,7 @@ import os
 load_dotenv('.env')
 bot_token = os.getenv('BOT_TOKEN')
 web3_rpc = os.getenv('WEB3_RPC')
-fetch_balances = os.getenv('FETCH_BALANCE')
+fetch_balances = os.getenv('FETCH_BALANCES')
 admin = os.getenv('ADMIN_ID')
 
 

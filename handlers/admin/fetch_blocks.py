@@ -14,11 +14,11 @@ async def fetch_blocks(message: types.Message):
         if len(com) == 1:
             time = await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch, [])  
             await m.edit_text(f"Fetch job finished in {round(time, 3)} seconds")
-        elif len(com) == 2:
-            await m.edit_text("Wrong command! START and END blocks required")
         elif len(com) == 3:
             time = await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch, [int(com[1]), int(com[2])])  
             await m.edit_text(f"Fetch job finished in {round(time, 3)} seconds")
+        elif len(com) == 2 or len(com) > 3:
+            await m.edit_text("Wrong command! START and END blocks required")
         else:
             await m.edit_text("Wrong command!")
     else:
