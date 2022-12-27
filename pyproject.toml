@@ -17,7 +17,9 @@ asyncio = "^3.4.3"
 sqlalchemy = "^1.4.45"
 aioschedule = "^0.5.2"
 sqlalchemy-utils = "^0.38.3"
-web_scraper = { git = "https://github.com/mariusvi/web_scraper.git", branch = "main" }
+# web_scraper = { git = "https://github.com/mariusvi/web_scraper.git", branch = "main" }
+python-binance = "^1.0.16"
+web3 = "^5.31.3"
 
 
 [build-system]

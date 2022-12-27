@@ -137,7 +137,6 @@ class Fetch_blocks():
 
         receipt_data = self._web3.eth.getTransactionReceipt(tx_hash)
         receipt_row = {}
-
         if self._fetch_balances:
             balance_from = self._web3.eth.getBalance(receipt_data['from'], block_identifier=block_num)
             try:

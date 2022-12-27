@@ -6,6 +6,7 @@ import asyncio
 
 session = get_session()
 
+
 async def timer_func(message):
     for i in range(10):
     #    await message.answer(f"Starting scraping!{i}")
@@ -20,6 +21,7 @@ async def db_command(message: types.Message):
         session.add(user)
         session.commit()
     await bot.send_message(message.from_user.id, "Data in database!")
+
 
 
 
