@@ -44,9 +44,9 @@ async def database_command(message: types.Message):
 
 async def blocks_button_callback(callback: types.CallbackQuery):
     with session:
-            all_blocks = session.query(Block).all()
-            all_tx = session.query(Tx).all()
-            all_receipt = session.query(Receipt).all()
+            all_blocks = session.query(Block.blockNumber).all()
+            all_tx = session.query(Tx.tx_hash).all()
+            all_receipt = session.query(Receipt.tx_hash).all()
             last_block_in_db_call = session.query(Block).order_by(desc(Block.blockNumber)).first()
             last_block_in_db = last_block_in_db_call.blockNumber
             last_block_timestamp = datetime.fromtimestamp(last_block_in_db_call.timestamp)

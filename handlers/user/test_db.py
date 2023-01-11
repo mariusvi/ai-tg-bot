@@ -23,8 +23,6 @@ async def db_command(message: types.Message):
     await bot.send_message(message.from_user.id, "Data in database!")
 
 
-
-
 def register_user_test_db_handlers(dp: Dispatcher):
     dp.register_message_handler(db_command, commands=['test_db'])
 
