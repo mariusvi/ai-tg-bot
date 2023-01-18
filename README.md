@@ -23,33 +23,36 @@ This Telegram bot is designed to control a blockchain and interact with the Bina
 
 ## EXAMPLES
     `/start`
-<img src="media/start.png" alt="start command" width="200"/>
+<img src="media/start.png" alt="start command" width="300"/>
 
     `/commands`
-<img src="media/commands.png" alt="start command" width="200"/>
+<img src="media/commands.png" alt="start command" width="300"/>
 
     `/database`
-<img src="media/database.png" alt="start command" width="200"/>
+<img src="media/database.png" alt="start command" width="300"/>
 
     `/blocks`
-<img src="media/blocks.png" alt="start command" width="200"/>
+<img src="media/blocks.png" alt="start command" width="300"/>
 
     `/ticker`
-<img src="media/ticker.png" alt="start command" width="200"/>
+<img src="media/ticker.png" alt="start command" width="300"/>
 
     `/scrape`
-<img src="media/scrape_command.png" alt="start command" width="200"/>
-<img src="media/scrape_job_done.png" alt="start command" width="200"/>
+<img src="media/scrape_command.png" alt="start command" width="300"/>
+<img src="media/scrape_job_done.png" alt="start command" width="300"/>
 
     `/fetch_ticker`
-<img src="media/fetch_ticker_command.png" alt="start command" width="200"/>
-<img src="media/fetch_ticker_job_done.png" alt="start command" width="200"/>
+<img src="media/fetch_ticker_command.png" alt="start command" width="300"/>
+<img src="media/fetch_ticker_job_done.png" alt="start command" width="300"/>
 
     `/fetch_blocks`
-<img src="media/fetch_blocks_command.png" alt="start command" width="200"/>
-<img src="media/fetching_blocks.png" alt="start command" width="200"/>
-<img src="media/fetch_blocks_job_done.png" alt="start command" width="200"/>
+<img src="media/fetch_blocks_command.png" alt="start command" width="300"/>
+<img src="media/fetching_blocks.png" alt="start command" width="300"/>
+<img src="media/fetch_blocks_job_done.png" alt="start command" width="300"/>
 
+### Model and predictions
+<img src="media/model.png" alt="start command" width="600"/>
+<img src="media/model_plot.png" alt="start command" width="600"/>
 
 
 ## SUPPORT
