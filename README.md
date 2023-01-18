@@ -12,18 +12,18 @@ This Telegram bot is designed to control a blockchain and interact with the Bina
 
 1. Start a chat with the bot on Telegram (https://t.me/ai_course_test_bot)
 2. Use the following commands to interact with the bot:
-    /start: Command for start
-    /database: Command for database overview
-    /predict: Command to predict prices.
-    /scrape: Command for start scraper, scraper will scrape all websites links from https://cryptolinks.com
-    /fetch_blocks: Command to fetch blocks data, sync all blocks from latest on db till latest on chain. 
+    - /start: Command for start
+    - /database: Command for database overview
+    - /predict: Command to predict prices.
+    - /scrape: Command for start scraper, scraper will scrape all websites links from https://cryptolinks.com
+    - /fetch_blocks: Command to fetch blocks data, sync all blocks from latest on db till latest on chain. 
             Use `/fetch_blocks 101 159` for custom range.
-    /fetch_ticker: Command to fetch ticker data, sync all candles from latest on db till latest on exchange. 
+    - /fetch_ticker: Command to fetch ticker data, sync all candles from latest on db till latest on exchange. 
             Use `/fetch_ticker ETHUSDT` for ETH and USDT ticker.
 
 # EXAMPLES
     `/start`
-"![start command](media/Screenshot%202023-01-18%20at%2016.13.36.png)"
+![start command](media/start.png)
 
 
 # SUPPORT
