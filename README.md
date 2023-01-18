@@ -23,7 +23,7 @@ This Telegram bot is designed to control a blockchain and interact with the Bina
 
 # EXAMPLES
     `/start`
-![<img src="media/start.png" alt="start command" width="250"/>](media/start.png)
+![<img src="media/start.png" alt="start command" width="150"/>]
 
 
 # SUPPORT
