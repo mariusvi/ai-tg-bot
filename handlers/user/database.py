@@ -7,7 +7,13 @@ from database.models.Block import Block
 from database.models.Data_sources import Data_sources
 from database.models.Tx import Tx
 from database.models.Receipt import Receipt
+from database.models.Ticker_ETHUSDT_15m import Ticker_ETHUSDT_15m
 from datetime import datetime
+import matplotlib.pyplot as plt
+import mplfinance as fplt
+import pandas as pd
+import base64
+import io
 
 
 session = get_session()
@@ -28,6 +34,7 @@ async def database_command(message: types.Message):
     with session:
         all_blocks = session.query(Block).all()
         data_sources = session.query(Data_sources).all()
+        ticker = session.query(Ticker_ETHUSDT_15m).all()
     m = """<b>Database</b>
 
     Links in database: {}
@@ -36,13 +43,13 @@ async def database_command(message: types.Message):
 
     News in database: 0
 
-    Tickers available:
-        no tickers
+    Candles in ticker: {}
     
-    """.format(len(data_sources), len(all_blocks))
+    """.format(len(data_sources), len(all_blocks), len(ticker))
     await bot.send_animation(message.from_user.id, caption=m, animation=BANNER, reply_markup=DATABASE_KEYBOARD, parse_mode="HTML")
 
 async def blocks_button_callback(callback: types.CallbackQuery):
+    await callback.message.edit_caption(caption="loading...", reply_markup=BLOCKS_KEYBOARD, parse_mode="HTML")
     with session:
             all_blocks = session.query(Block.blockNumber).all()
             all_tx = session.query(Tx.tx_hash).all()
@@ -67,11 +74,52 @@ async def blocks_button_callback(callback: types.CallbackQuery):
         # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
 
 async def ticker_button_callback(callback: types.CallbackQuery):
-        await callback.message.edit_caption("Soon!", reply_markup=DATABASE_KEYBOARD)
+        with session:
+            ticker = session.query(Ticker_ETHUSDT_15m).all()
+        total = len(ticker)
+        ticker_df = pd.DataFrame([row.__dict__ for row in ticker]).tail(50)
+        
+        ticker = ticker_df.loc[:,("open_time", "close_time", "open", "close", "high", "low", "volume", "number_of_trades")]
+        ticker['open_date'] = ticker['open_time'].values.astype(dtype='datetime64[ms]')
+        ticker['close_date'] = ticker['close_time'].values.astype(dtype='datetime64[ms]')
+        ticker.index = pd.DatetimeIndex(ticker['open_date'])
+        fig, axs = plt.subplots(3, sharex=True, figsize=(12,10))
+        fig.suptitle('Data from Binance ticker (last 50 candles)')
+        axs[0].plot(ticker["open_date"], ticker["close"], color="green", label="ETH price", lw=2)
+        axs[0].set_title("ETH price")
+        axs[0].set_ylabel("price (USD)")
+        axs[1].plot(ticker["open_date"], ticker["volume"], color="blue", label="volume", lw=2)
+        axs[1].set_title("Trades volume")
+        axs[1].set_ylabel("ETH")
+        axs[2].plot(ticker["open_date"], ticker["number_of_trades"], color="magenta", label="trades count", lw=2)
+        axs[2].set_title("Trades count")
+        axs[2].set_ylabel("trades")
+        fig.legend()
+        buf = io.BytesIO()
+        fig.savefig(buf, format='png', )
+        buf.seek(0)
+
+        m = """<b>Ticker</b>
+
+        Total candles in ticker: {}
+        
+        <b>Last candle</b>
+
+        Open time: {} 
+
+        Close time: {}
+        
+        Open price: {} USD
+
+        Close price: {} USD
+        
+        """.format(total, ticker["open_date"].tail(1).values[0], ticker["close_date"].tail(1).values[0], ticker["open"].tail(1).values[0], ticker["close"].tail(1).values[0])
+        await callback.message.answer_photo(buf)
+        await callback.message.edit_caption(caption=m, reply_markup=BLOCKS_KEYBOARD, parse_mode="HTML")
         # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
 
 async def news_button_callback(callback: types.CallbackQuery):
-        await callback.message.edit_caption("Soon!", reply_markup=DATABASE_KEYBOARD)
+        await callback.message.edit_caption("Empty", reply_markup=DATABASE_KEYBOARD)
         # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
 
 def register_user_database_handlers(dp: Dispatcher):

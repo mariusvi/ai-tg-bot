@@ -26,6 +26,8 @@ seaborn = "^0.12.2"
 scikit-learn = "^1.2.0"
 eli5 = "^0.13.0"
 xgboost = "^1.7.3"
+cloudpickle = "^2.2.0"
+mplfinance = "^0.12.9b7"
 
 
 [build-system]

@@ -7,7 +7,7 @@ from utils.fetcher.fetch_ticker import Fetch_ticker
 
 ticker = Fetch_ticker()
 
-async def ticker_command(message: types.Message):
+async def fetch_ticker_command(message: types.Message):
     if is_admin(message):
         m = await bot.send_message(message.from_user.id, "Working...")
         com = message.text.split()
@@ -27,4 +27,4 @@ async def ticker_command(message: types.Message):
     
 
 def register_user_fetc_ticker_handlers(dp: Dispatcher):
-    dp.register_message_handler(ticker_command, commands=['ticker'])
+    dp.register_message_handler(fetch_ticker_command, commands=['fetch_ticker'])

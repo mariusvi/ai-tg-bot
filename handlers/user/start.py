@@ -28,14 +28,18 @@ COMMANDS_CAPTION = """🗒️ <b>Docs for available commands</b>
 USER
 • /start: Command for start
 
-• /database: Command to fetch data
+• /database: Command for database overview
 
-• /predict: Command to predict price.
+• /predict: Command to predict prices.
 
 ADMIN
-• /scrape: Command for start scraper
+• /scrape: Command for start scraper, scraper will scrape all websites links from https://cryptolinks.com
 
-• /fetch: Command to fetch data, sync all blocks from latest on db till latest on chain. Use /fetch 101 159 for custom range.
+• /fetch_blocks: Command to fetch blocks data, sync all blocks from latest on db till latest on chain. 
+        Use <code>'/fetch_blocks 101 159'</code> for custom range.
+
+• /fetch_ticker: Command to fetch ticker data, sync all candles from latest on db till latest on exchange. 
+        Use <code>'/fetch_ticker ETHUSDT'</code> for ETH and USDT ticker.
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus tempor tristique sagittis. 
 """

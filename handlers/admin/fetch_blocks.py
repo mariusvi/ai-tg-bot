@@ -7,7 +7,7 @@ from utils.helpers.helpers import is_admin
 session = get_session()
 fetcher = Fetch_blocks(1)
 
-async def fetch_blocks(message: types.Message):
+async def fetch_blocks_command(message: types.Message):
     if is_admin(message):
         m = await bot.send_message(message.from_user.id, "Working...")
         com = message.text.split()
@@ -26,4 +26,4 @@ async def fetch_blocks(message: types.Message):
    
 
 def register_user_fetc_blocks_handlers(dp: Dispatcher):
-    dp.register_message_handler(fetch_blocks, commands=['fetch'])
+    dp.register_message_handler(fetch_blocks_command, commands=['fetch_blocks'])
