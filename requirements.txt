@@ -1,7 +1,0 @@
-aiogram
-python-dotenv
-requests 
-bs4
-asyncio
-tqdm
-bs4
