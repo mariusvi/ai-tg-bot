@@ -1,7 +1,7 @@
 ## INTRODUCTION
 This Telegram bot is designed to control python code and interact with the Binance cryptocurrency exchange and blockchain. The bot also fetches news data and stores it in a SQLite database, where it is aggregated and used to create a predictive model. The model can be used to predict future prices on the exchange.
 
-## INSTALATION
+## INSTALLATION
 - Clone the repository to your local machine.
 - Make copy of `.env.example` file, rename to `.env`, fill necessary data.
 - Run `poetry install` to install the necessary libraries.
