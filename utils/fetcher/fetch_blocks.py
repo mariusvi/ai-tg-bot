@@ -1,5 +1,5 @@
 from web3 import Web3
-from typing import List, Any, Dict, Tuple, HexStr
+from typing import List, Any, Dict, Tuple
 import time
 from database.models.Block import Block
 from database.models.Receipt import Receipt
@@ -82,7 +82,7 @@ class Fetch_blocks:
 
         return time.time() - start_time
 
-    def get_block_row(self, block_num) -> Tuple[Dict[Any, HexStr], Any]:
+    def get_block_row(self, block_num) -> Tuple[Dict[Any, Any], Any]:
         block_data = self._web3.eth.getBlock(block_num)
         block_row = {}
         to_hex = [
