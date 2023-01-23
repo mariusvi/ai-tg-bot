@@ -21,6 +21,7 @@ async def on_startup(_):
     asyncio.create_task(scheduler())
     print("Schedulers loaded!")
 
+
 scrape.register_admin_scrape_handlers(dp)
 start.register_user_start_handlers(dp)
 about.register_user_about_handlers(dp)
@@ -31,5 +32,3 @@ fetch_ticker.register_user_fetc_ticker_handlers(dp)
 
 
 executor.start_polling(dp, skip_updates=True, on_startup=on_startup)
-
-

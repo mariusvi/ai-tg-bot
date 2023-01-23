@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Integer
 from database.orm_base import Base
 
+
 class Users(Base):
     __tablename__ = "users"
 
@@ -19,4 +20,3 @@ class Users(Base):
 
     def __repr__(self) -> str:
         return f"{self.name} {self.tg_user_name} {self.tg_id} {self.chat_id} {self.role}"
-

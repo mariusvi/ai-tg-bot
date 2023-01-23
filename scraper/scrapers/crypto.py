@@ -3,7 +3,6 @@ from scraper.models.item import Item, ItemLink, GroupLink
 from scraper.scrapers.base import BaseScraper
 
 
-
 class Crypto(BaseScraper):
     __items_per_page__: int = 44
     __domain__: str = "https://cryptolinks.com"
@@ -15,7 +14,7 @@ class Crypto(BaseScraper):
             list_segment = content.find("div", class_="thumb__row")
             items_list = list_segment.find_all("a", class_="thumb__head")
             for item_div in items_list:
-                link = item_div['href'][24:]
+                link = item_div["href"][24:]
                 title = item_div.text
                 results.append(GroupLink(url=link, title=title))
 
@@ -32,7 +31,7 @@ class Crypto(BaseScraper):
                 results.append(ItemLink(url=link))
 
         return results
-        
+
     def _retrieve_item_data(self, keyword: str) -> List[ItemLink]:
         results: List[ItemLink] = []
         content = self._get_page_content(keyword)
@@ -45,4 +44,3 @@ class Crypto(BaseScraper):
             description = str(content.find("div", class_="review__box").find_all("p"))
 
         return Item(title=title, url=url, description=description, category=category)
-            

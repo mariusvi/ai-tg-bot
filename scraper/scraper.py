@@ -8,9 +8,7 @@ class Scraper:
     def _parse_scrapers(self, scrapers: list[str]) -> List[BaseScraper]:
         return [SCRAPERS[scraper]() for scraper in scrapers]
 
-    def scrape(
-        self, keyword: str, scrapers: List[str]
-    ) -> List[Dict]:
+    def scrape(self, keyword: str, scrapers: List[str]) -> List[Dict]:
         parsed_scrapers: List[BaseScraper] = self._parse_scrapers(scrapers)
         results: List[Dict] = []
 

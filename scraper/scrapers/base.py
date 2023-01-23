@@ -22,19 +22,18 @@ class BaseScraper(ABC):
             return BeautifulSoup(resp.content, features="html.parser")
         raise Exception("Cannot reach content!")
 
-
     def scrape(self, keyword: str) -> List[Item]:
         categories_links: List[Optional[GroupLink]] = self._retrieve_categories_list()
-        
+
         scraped_items_links: List[Optional[ItemLink]] = []
         for categorie in categories_links[5:8]:
             items_links: List[Optional[ItemLink]] = self._retrieve_items_list(categorie.url)
             scraped_items_links.append(items_links)
 
         scrapped_items_data: List[Item] = []
-        for item_link_group in scraped_items_links: #TODO one for less
+        for item_link_group in scraped_items_links:  # TODO one for less
             for item_link in tqdm(item_link_group):
                 data = self._retrieve_item_data(item_link.url)
                 scrapped_items_data.append(data)
-                
+
         return scrapped_items_data

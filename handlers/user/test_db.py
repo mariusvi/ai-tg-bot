@@ -9,10 +9,11 @@ session = get_session()
 
 async def timer_func(message):
     for i in range(10):
-    #    await message.answer(f"Starting scraping!{i}")
-       await asyncio.sleep(2) 
-       print("bla")
+        #    await message.answer(f"Starting scraping!{i}")
+        await asyncio.sleep(2)
+        print("bla")
     return True
+
 
 async def db_command(message: types.Message):
     await timer_func(message=message)
@@ -24,6 +25,4 @@ async def db_command(message: types.Message):
 
 
 def register_user_test_db_handlers(dp: Dispatcher):
-    dp.register_message_handler(db_command, commands=['test_db'])
-
-
+    dp.register_message_handler(db_command, commands=["test_db"])

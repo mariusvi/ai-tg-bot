@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String, Index
 from database.orm_base import Base
 
+
 class Tx(Base):
-    __tablename__ = 'tx'
+    __tablename__ = "tx"
 
     accessList = Column(String)
     blockHash = Column(String)
@@ -24,7 +25,4 @@ class Tx(Base):
     maxFeePerGas = Column(Integer)
     maxPriorityFeePerGas = Column(Integer)
 
-    
-    __table_args__ = (
-        Index('index_tx', 'blockNumber', 'tx_hash'),
-    ) 
+    __table_args__ = (Index("index_tx", "blockNumber", "tx_hash"),)

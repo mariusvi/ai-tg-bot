@@ -2,6 +2,7 @@ from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from bot import dp, bot
 from scraper.scraper import Scraper
+
 # import asyncio
 from database.db import get_session
 from database.models.Users import Users
@@ -21,7 +22,9 @@ Fusce elementum sem quis mauris pulvinar, eu tincidunt leo viverra.
 commands_button = InlineKeyboardButton(text="📖 Commands", callback_data="COMMANDS_BUTTON")
 datasets_button = InlineKeyboardButton(text="🔢 Database", callback_data="DATABASE_BUTTON")
 predictions_button = InlineKeyboardButton(text="🎯 Predictions", callback_data="PREDICTIONS_BUTTON")
-START_KEYBOARD = InlineKeyboardMarkup().add(commands_button).add(datasets_button).add(predictions_button)
+START_KEYBOARD = (
+    InlineKeyboardMarkup().add(commands_button).add(datasets_button).add(predictions_button)
+)
 
 COMMANDS_CAPTION = """🗒️ <b>Docs for available commands</b>
 
@@ -49,40 +52,60 @@ COMMANDS_KEYBOARD = InlineKeyboardMarkup().add(back_button)
 # async def timer_func(message):
 #     for i in range(1):
 #        await message.answer(f"Starting scraping!{i}")
-#        await asyncio.sleep(1) 
+#        await asyncio.sleep(1)
 #     return True
+
 
 async def start_command(message: types.Message):
     # await timer_func(message)
     with session:
         user_in_db = session.query(Users).filter(Users.tg_id == message.from_user.id).first()
         if not user_in_db:
-            user = Users(message.from_user.first_name, message.from_user.username, message.from_user.id, message.chat.id, "user")
+            user = Users(
+                message.from_user.first_name,
+                message.from_user.username,
+                message.from_user.id,
+                message.chat.id,
+                "user",
+            )
             session.add(user)
             session.commit()
     try:
-        await bot.send_animation(chat_id=message.from_user.id, caption=START_CAPTION, animation=BANNER, reply_markup=START_KEYBOARD, parse_mode="HTML")
+        await bot.send_animation(
+            chat_id=message.from_user.id,
+            caption=START_CAPTION,
+            animation=BANNER,
+            reply_markup=START_KEYBOARD,
+            parse_mode="HTML",
+        )
     except:
-        await message.reply('Find me here! \n t.me/ai_course_test_bot')
+        await message.reply("Find me here! \n t.me/ai_course_test_bot")
+
 
 async def comands_button_callback(callback: types.CallbackQuery):
-        await callback.answer("Commands")
-        await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
-        await callback.message.edit_reply_markup(COMMANDS_KEYBOARD)
-    
+    await callback.answer("Commands")
+    await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
+    await callback.message.edit_reply_markup(COMMANDS_KEYBOARD)
+
+
 async def back_button_callback(callback: types.CallbackQuery):
-        await callback.message.edit_caption(START_CAPTION, parse_mode="HTML")
-        await callback.message.edit_reply_markup(START_KEYBOARD)
+    await callback.message.edit_caption(START_CAPTION, parse_mode="HTML")
+    await callback.message.edit_reply_markup(START_KEYBOARD)
+
 
 async def predictions_button_callback(callback: types.CallbackQuery):
-        await callback.answer("Predictions clicked! 🖱️")
+    await callback.answer("Predictions clicked! 🖱️")
 
 
 def register_user_start_handlers(dp: Dispatcher):
-    dp.register_message_handler(start_command, commands=["start"])  
-    dp.register_callback_query_handler(comands_button_callback, lambda query: query.data in ["COMMANDS_BUTTON"])  
-    dp.register_callback_query_handler(back_button_callback, lambda query: query.data in ["BACK_TO_START_BUTTON"])  
-    dp.register_callback_query_handler(predictions_button_callback, lambda query: query.data in ["PREDICTIONS_BUTTON"])  
-    dp.register_callback_query_handler(start_command, lambda query: query.data in ["HOME_BUTTON"])  
-
-
+    dp.register_message_handler(start_command, commands=["start"])
+    dp.register_callback_query_handler(
+        comands_button_callback, lambda query: query.data in ["COMMANDS_BUTTON"]
+    )
+    dp.register_callback_query_handler(
+        back_button_callback, lambda query: query.data in ["BACK_TO_START_BUTTON"]
+    )
+    dp.register_callback_query_handler(
+        predictions_button_callback, lambda query: query.data in ["PREDICTIONS_BUTTON"]
+    )
+    dp.register_callback_query_handler(start_command, lambda query: query.data in ["HOME_BUTTON"])

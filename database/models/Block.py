@@ -1,8 +1,9 @@
 from sqlalchemy import Column, Integer, String, Index
 from database.orm_base import Base
 
+
 class Block(Base):
-    __tablename__ = 'block'
+    __tablename__ = "block"
 
     baseFeePerGas = Column(Integer)
     difficulty = Column(Integer)
@@ -26,7 +27,4 @@ class Block(Base):
     transactionsRoot = Column(String)
     uncles = Column(String)
 
-    
-    __table_args__ = (
-        Index('index_block', 'timestamp'),
-    )
+    __table_args__ = (Index("index_block", "timestamp"),)

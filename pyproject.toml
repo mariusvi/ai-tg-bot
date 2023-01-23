@@ -30,6 +30,56 @@ cloudpickle = "^2.2.0"
 mplfinance = "^0.12.9b7"
 
 
+[tool.poetry.group.dev.dependencies]
+black = "^22.12.0"
+flake8 = "^6.0.0"
+mypy = "^0.991"
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.flake8]
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.eggs
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | \.vscode
+  | _build
+  | buck-out
+  | build
+  | dist
+  | condaenv
+)/
+'''
+max_line_length = 99
+max-complexity = 18
+
+[tool.black]
+line-length = 99
+preview = true
+include = '/project$|\.pyi?$'
+exclude = '''
+/(
+    \.git
+  | \.hg
+  | \.eggs
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | \.vscode
+  | _build
+  | buck-out
+  | build
+  | dist
+  | condaenv
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 99

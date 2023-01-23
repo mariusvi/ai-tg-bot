@@ -14,6 +14,7 @@ class Item(BaseModel):
 class ItemLink(BaseModel):
     url: str
 
+
 class GroupLink(BaseModel):
     url: str
-    title: str 
+    title: str

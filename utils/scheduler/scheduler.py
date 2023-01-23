@@ -4,14 +4,17 @@ from utils.fetcher.fetch_blocks import Fetch_blocks
 
 fetcher = Fetch_blocks()
 
+
 async def send_message_1():
     print("Send first message")
+
 
 async def send_message_2():
     print("Send second message")
 
+
 async def update_db():
-    await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch)  
+    await asyncio.get_running_loop().run_in_executor(None, fetcher.start_fetch)
 
 
 async def scheduler():

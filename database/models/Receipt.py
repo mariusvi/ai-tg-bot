@@ -3,15 +3,15 @@ from database.orm_base import Base
 
 
 class Receipt(Base):
-    __tablename__ = 'receipt'
+    __tablename__ = "receipt"
 
     blockHash = Column(String)
     blockNumber = Column(Integer)
     contractAddress = Column(String)
-    cumulativeGasUsed =Column(Integer)
-    effectiveGasPrice =Column(Integer)
+    cumulativeGasUsed = Column(Integer)
+    effectiveGasPrice = Column(Integer)
     fromAddress = Column(String)
-    gasUsed =Column(Integer)
+    gasUsed = Column(Integer)
     logs = Column(String)
     logsBloom = Column(String)
     status = Column(Integer)
@@ -23,8 +23,4 @@ class Receipt(Base):
     type = Column(String)
     root = Column(String)
 
-    __table_args__ = (
-        Index('index_receipt', 'fromAddress', 'toAddress', 'tx_hash'),
-    )
-
-   
+    __table_args__ = (Index("index_receipt", "fromAddress", "toAddress", "tx_hash"),)
