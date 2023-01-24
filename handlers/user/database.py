@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from bot import dp, bot
+from src.bot import dp, bot
 from sqlalchemy import desc
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.db import get_session

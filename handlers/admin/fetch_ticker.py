@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from bot import bot
+from src.bot import bot
 import asyncio
 from utils.helpers.helpers import is_admin
 from database.models.Ticker_ETHUSDT_15m import Ticker_ETHUSDT_15m

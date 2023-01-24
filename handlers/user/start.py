@@ -1,13 +1,11 @@
 from aiogram import types, Dispatcher
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
-from bot import dp, bot
-from scraper.scraper import Scraper
+from src.bot import dp, bot
 
 # import asyncio
 from database.db import get_session
 from database.models.Users import Users
 
-scraper = Scraper()
 session = get_session()
 
 BANNER = "https://cdn.dribbble.com/users/1373613/screenshots/5385718/media/30cede328265c92d61aa211591e70b62.gif"

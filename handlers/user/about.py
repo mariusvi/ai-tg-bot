@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from bot import dp, bot
+from src.bot import dp, bot
 
 
 async def about_command(message: types.Message):

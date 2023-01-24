@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from bot import bot
+from src.bot import bot
 from database.db import get_session
 from database.models.Users import Users
 import asyncio

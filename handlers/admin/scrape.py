@@ -1,5 +1,5 @@
 from aiogram import types, Dispatcher
-from scraper.scraper import Scraper
+from web_scraper.scraper import Scraper
 from database.db import get_session
 from database.models.Data_sources import Data_sources
 from datetime import datetime

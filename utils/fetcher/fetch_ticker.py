@@ -2,7 +2,7 @@ from typing import List
 from binance import Client
 from database.db import get_session
 from database.models.Ticker_ETHUSDT_15m import Ticker_ETHUSDT_15m
-from config import bnc_api_key, bnc_api_secret
+from src.config import bnc_api_key, bnc_api_secret
 
 
 class Fetch_ticker:

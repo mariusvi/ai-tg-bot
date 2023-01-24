@@ -1,6 +1,6 @@
 from aiogram import executor
 import asyncio
-from bot import dp
+from src.bot import dp
 from handlers import start
 from handlers import about
 from handlers import test_db

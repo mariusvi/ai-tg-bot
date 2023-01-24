@@ -7,7 +7,8 @@ from database.models.Tx import Tx
 from database.db import get_session
 from sqlalchemy import desc
 from tqdm import tqdm
-from config import web3_rpc, fetch_balances
+from src.config import web3_rpc, fetch_balances
+from eth_typing import HexStr
 
 
 class Fetch_blocks:
@@ -105,11 +106,11 @@ class Fetch_blocks:
             elif key == "number":
                 block_row["blockNumber"] = value
             elif key == "totalDifficulty":
-                block_row[key] = str(value)
+                block_row[key] = HexStr(value)
             elif key == "transactions":
-                block_row[key] = str(value)
+                block_row[key] = HexStr(value)
             elif key == "uncles":
-                block_row[key] = str(value)
+                block_row[key] = HexStr(value)
             else:
                 block_row[key] = value
 
@@ -131,9 +132,9 @@ class Fetch_blocks:
             elif key == "to":
                 tx_row["addressTo"] = value
             elif key == "accessList":
-                tx_row[key] = str(value)
+                tx_row[key] = HexStr(value)
             elif key == "value":
-                tx_row[key] = str(value)
+                tx_row[key] = HexStr(value)
             else:
                 tx_row[key] = value
 
