@@ -20,7 +20,6 @@ async def fetch_ticker_command(message: types.Message):
                 await m.edit_text("Job finished!")
             elif com[1] == "BTCUSDT":
                 await m.edit_text("Not available yet!")
-                # await asyncio.get_running_loop().run_in_executor(None, ticker.fetch_ticker, Ticker_ETHUSDT_15m, 1661352300000)
             else:
                 await m.edit_text("Wrong command!")
         else:

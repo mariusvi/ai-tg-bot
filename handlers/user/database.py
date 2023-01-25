@@ -85,8 +85,6 @@ async def blocks_button_callback(callback: types.CallbackQuery):
         len(all_blocks), len(all_tx), len(all_receipt), last_block_in_db, last_block_timestamp
     )
     await callback.message.edit_caption(caption=m, reply_markup=BLOCKS_KEYBOARD, parse_mode="HTML")
-    # await callback.message.edit_caption("Commands", reply_markup=DATABASE_KEYBOARD)
-    # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
 
 
 async def ticker_button_callback(callback: types.CallbackQuery):
@@ -143,19 +141,19 @@ async def ticker_button_callback(callback: types.CallbackQuery):
         
         """.format(
         total,
-        ticker["open_date"].tail(1).values[0],
-        ticker["close_date"].tail(1).values[0],
+        pd.to_datetime(ticker["open_date"].tail(1).values[0]),
+        pd.to_datetime(ticker["close_date"].tail(1).values[0]),
         ticker["open"].tail(1).values[0],
         ticker["close"].tail(1).values[0],
     )
     await callback.message.answer_photo(buf)
     await callback.message.edit_caption(caption=m, reply_markup=BLOCKS_KEYBOARD, parse_mode="HTML")
-    # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
+
 
 
 async def news_button_callback(callback: types.CallbackQuery):
     await callback.message.edit_caption("Empty", reply_markup=DATABASE_KEYBOARD)
-    # await callback.message.edit_caption(COMMANDS_CAPTION, parse_mode="HTML")
+
 
 
 def register_user_database_handlers(dp: Dispatcher):

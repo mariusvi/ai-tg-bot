@@ -18,7 +18,7 @@ class Fetch_blocks:
         self._every_block = every_block
         self._fetch_balances = fetch_balances
 
-    def start_fetch(self, block_range: List = []) -> float:
+    def start_fetch(self, block_range: List = None) -> float:
         start_time = time.time()
         last_block = self._web3.eth.get_block("latest")["number"]
         with self._session as session:
@@ -106,11 +106,14 @@ class Fetch_blocks:
             elif key == "number":
                 block_row["blockNumber"] = value
             elif key == "totalDifficulty":
-                block_row[key] = HexStr(value)
+                # block_row[key] = HexStr(value)
+                block_row[key] = str(value)          # type: ignore       
             elif key == "transactions":
-                block_row[key] = HexStr(value)
+                # block_row[key] = HexStr(value)
+                block_row[key] = str(value)              # type: ignore   
             elif key == "uncles":
-                block_row[key] = HexStr(value)
+                # block_row[key] = HexStr(value)
+                block_row[key] = str(value)            # type: ignore     
             else:
                 block_row[key] = value
 
@@ -132,9 +135,11 @@ class Fetch_blocks:
             elif key == "to":
                 tx_row["addressTo"] = value
             elif key == "accessList":
-                tx_row[key] = HexStr(value)
+                # tx_row[key] = HexStr(value)
+                tx_row[key] = str(value)  # type: ignore
             elif key == "value":
-                tx_row[key] = HexStr(value)
+                # tx_row[key] = HexStr(value)
+                tx_row[key] = str(value)  # type: ignore
             else:
                 tx_row[key] = value
 

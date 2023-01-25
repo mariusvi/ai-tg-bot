@@ -9,9 +9,8 @@ session = get_session()
 
 async def timer_func(message):
     for i in range(10):
-        #    await message.answer(f"Starting scraping!{i}")
         await asyncio.sleep(2)
-        print("bla")
+        print("tick")
     return True
 
 
